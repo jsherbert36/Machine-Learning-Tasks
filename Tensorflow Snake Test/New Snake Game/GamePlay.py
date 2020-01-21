@@ -13,6 +13,15 @@ class Apple(pygame.sprite.Sprite):
         self.image = pygame.Surface([self.width,self.width])
         self.image.fill(RED)
         self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0,(size[0]-10)//self.width) * self.width
+        self.rect.y = random.randint(0,(size[1]-10)//self.width) * self.width
+    def reset(self):
+        self.temp_x = random.randint(0,(size[0]-10)//self.width) * self.width
+        self.temp_y = random.randint(0,(size[1]-10)//self.width) * self.width
+        for block in snake1.snake_group:
+            if block.rect.Rect.collidepoint(self.temp_x,self.temp_y):
+                
+
         
 class Snake(pygame.sprite.Sprite):
     def __init__(self):
@@ -43,9 +52,9 @@ class Snake(pygame.sprite.Sprite):
         self.temp_last_block = self.Pos_Queue.get()
         for block in snake_group:
             if block.rect.x == self.temp_last_block[0] and self.rect.y == self.temp_last_block[1]:
-                block.kill()                
-        
-        
+                block.kill()
+    def draw(self,display_):
+        self.snake_group.draw(display_)
     def move(self,val):
         if val in ['right','left','down','up']:
             self.direction = val
@@ -87,12 +96,14 @@ def gameplay()
 
         if pygame.sprite.spritecollide(apple1, snake_group, False):
             apple.reset()
-        for block in snake_group:
+        for block in snake1.snake_group:
             if pygame.sprite.spritecollide(block, snake_group, False):
                 game_over = True
+        for block in snake1.snake_group:
+            if block
         screen.fill(BLACK)
         apple1.draw(screen)
-        snake_group.draw(screen)
+        snake1.draw(screen)
         clock.tick(50)
         pygame.display.flip()
 

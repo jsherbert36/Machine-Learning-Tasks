@@ -2,8 +2,7 @@ from pygame.locals import *
 from random import randint
 import pygame
 import time
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+
 GREEN = (0, 255, 0)
 BLUE = (0,0,255)
 RED = (255, 0, 0)
@@ -19,8 +18,6 @@ class Apple:
  
     def draw(self, surface, image):
         surface.blit(image,(self.x, self.y)) 
- 
- 
 class Player:
     x = [0]
     y = [0]
